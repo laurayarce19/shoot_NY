@@ -33,7 +33,7 @@ def load_data(url):
     return df
 
 # Aplicar función
-df = load_data('NYPD_Shooting_Incident_Data__Historic_.csv')
+df = load_data('Bases/NYPD_Shooting_Incident_Data__Historic_.csv')
 
 #---------------------------------------------------------------------
 
