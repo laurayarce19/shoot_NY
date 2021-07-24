@@ -115,13 +115,13 @@ c1, c2= st.beta_columns((1,1)) # Entre paréntesis se indica el tamaño de las c
 
 # Hacer código de la primera columna (Mapa sencillo):
 c1.markdown("<h3 style='text-align: center; color: black;'> ¿Dónde han ocurrido disparos en Nueva York? </h3>", unsafe_allow_html=True)
-year = c1.slider('Año en el que se presento el suceso', 2006, 2020) # Crear variable que me almacene el año seleccionado
+year = c1.slider('Año en el que ocurrió el suceso', 2006, 2020) # Crear variable que me almacene el año seleccionado
 c1.map(df[df['year']==year][['latitude', 'longitude']].dropna()) # Generar mapa
 
   
 # Hacer código de la segunda columna:
 c2.markdown("<h3 style='text-align: center; color: black;'> ¿A qué horas ocurren disparos en Nueva York? </h3>", unsafe_allow_html=True)
-hora = c2.slider('Hora en la que se presento el suceso',0, 23) # Crear variable que me almacene la hora seleccionada
+hora = c2.slider('Hora en la que ocurrió el suceso',0, 23) # Crear variable que me almacene la hora seleccionada
 df2 = df[df['hour']==hora] # Filtrar DataFrame
 
 
