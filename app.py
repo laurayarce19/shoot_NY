@@ -12,12 +12,16 @@ import pandas as pd
 import pydeck as pdk
 import plotly.express as px
 import plotly.graph_objects as go
+import base64
 
 # Utilizar la página completa en lugar de una columna central estrecha
 st.set_page_config(layout="wide")
 
 # Título principal, h1 denota el estilo del título 1
 st.markdown("<h1 style='text-align: center; color: #3C9AD0;'>Histórico de disparos en Nueva York 🗽 🔫 </h1>", unsafe_allow_html=True)
+
+# Generar espacio entre el título y los indicadores
+st.markdown("<h3 </h3>", unsafe_allow_html=True)
 
 # Función para importar datos
 @st.cache(persist=True) # Código para que quede almacenada la información en el cache
@@ -31,6 +35,13 @@ def load_data(url):
     df.columns = df.columns.map(str.lower) # convertir columnas a minúscula
     
     return df
+
+# función para obtener link de descarga
+def get_table_download_link(df):
+    csv = df.to_csv(index=False)
+    b64 = base64.b64encode(csv.encode()).decode()  # some strings <-> bytes conversions necessary here
+    href = f'<a href="data:file/csv;base64,{b64}" download="datos.csv">Descargar archivo csv</a>'
+    return href
 
 # Aplicar función
 df = load_data('Bases/NYPD_Shooting_Incident_Data__Historic_.csv')
@@ -52,7 +63,7 @@ top_vic_num = (round((df['vic_sex'].value_counts()/df['vic_sex'].value_counts().
 
 # Enviar a streamlit
 c1.text('Atacador: '+str(top_perp_name)+', '+str(top_perp_num)+'%')
-c1.text('Victima: '+str(top_vic_name)+', '+str(top_vic_num)+'%')
+c1.text('Víctima: '+str(top_vic_name)+', '+str(top_vic_num)+'%')
 
 
 
@@ -68,7 +79,7 @@ top_vic_num = (round((df['vic_race'].value_counts()/df['vic_race'].value_counts(
 
 # Enviar a streamlit
 c2.text('Atacador: '+str(top_perp_name)+', '+str(top_perp_num)+'%')
-c2.text('Victima: '+str(top_vic_name)+', '+str(top_vic_num)+'%')
+c2.text('Víctima: '+str(top_vic_name)+', '+str(top_vic_num)+'%')
 
 
 
@@ -83,7 +94,7 @@ top_vic_num = (round((df['vic_age_group'].value_counts()/df['vic_age_group'].val
 
 # Enviar a streamlit
 c3.text('Atacador: '+str(top_perp_name)+', '+str(top_perp_num)+'%')
-c3.text('Victima: '+str(top_vic_name)+', '+str(top_vic_num)+'%')
+c3.text('Víctima: '+str(top_vic_name)+', '+str(top_vic_num)+'%')
 
 
 # Cuarto markdown
@@ -102,7 +113,7 @@ c5.markdown("<h3 style='text-align: left; color: Gray;'> Top Hora</h3>", unsafe_
 
 # Organizar data
 top_perp_name = df['hour'].value_counts().index[0]
-top_perp_num = (round((df['hour'].value_counts()/df['boro'].value_counts().sum()),2)*100)[0]
+top_perp_num = (round((df['hour'].value_counts()/df['hour'].value_counts().sum()),2)*100)[0]
 
 # Enviar a streamlit
 c5.text('Hora: '+str(top_perp_name)+', '+str(top_perp_num)+'%')
@@ -344,3 +355,6 @@ if st.checkbox('Obtener datos por fecha y barrio', False):
 
 # Enviar tabla a streamlit
     st.write(fig)
+    
+# Generar link de descarga
+    st.markdown(get_table_download_link(df2), unsafe_allow_html=True)
