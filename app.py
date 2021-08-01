@@ -62,7 +62,7 @@ top_vic_name = df['vic_sex'].value_counts().index[0].capitalize()
 top_vic_num = (round((df['vic_sex'].value_counts()/df['vic_sex'].value_counts().sum()),2)*100)[0]
 
 # Enviar a streamlit
-c1.text('Atacador: '+str(top_perp_name)+', '+str(top_perp_num)+'%')
+c1.text('Atacante: '+str(top_perp_name)+', '+str(top_perp_num)+'%')
 c1.text('Víctima: '+str(top_vic_name)+', '+str(top_vic_num)+'%')
 
 
@@ -78,7 +78,7 @@ top_vic_name = df['vic_race'].value_counts().index[0].capitalize()
 top_vic_num = (round((df['vic_race'].value_counts()/df['vic_race'].value_counts().sum()),2)*100)[0]
 
 # Enviar a streamlit
-c2.text('Atacador: '+str(top_perp_name)+', '+str(top_perp_num)+'%')
+c2.text('Atacante: '+str(top_perp_name)+', '+str(top_perp_num)+'%')
 c2.text('Víctima: '+str(top_vic_name)+', '+str(top_vic_num)+'%')
 
 
@@ -93,7 +93,7 @@ top_vic_name = df['vic_age_group'].value_counts().index[0].capitalize()
 top_vic_num = (round((df['vic_age_group'].value_counts()/df['vic_age_group'].value_counts().sum()),2)*100)[0]
 
 # Enviar a streamlit
-c3.text('Atacador: '+str(top_perp_name)+', '+str(top_perp_num)+'%')
+c3.text('Atacante: '+str(top_perp_name)+', '+str(top_perp_num)+'%')
 c3.text('Víctima: '+str(top_vic_name)+', '+str(top_vic_num)+'%')
 
 
